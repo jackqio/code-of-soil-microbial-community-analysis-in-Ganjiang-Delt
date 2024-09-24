@@ -1,0 +1,10 @@
+
+# setwd("/home/shengy/NTI/Qiao/soil/")
+library("iCAMP")
+library("ape")
+tree<-read.tree('Poyang202208_16S.tree')
+comm<-read.table('Poyang202208_16Sotu.txt',sep='\t',row.names=1,header=T)
+comm=t(comm)
+pd <- cophenetic(tree)
+qpen.out <- qpen(comm = comm, pd = pd, sig.bNTI = 2, sig.rc = 0.95, rand.time = 1000, nworker=4)
+write.csv(qpen.out, 'qpen.out.csv', row.names = FALSE)
